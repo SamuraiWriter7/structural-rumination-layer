@@ -1,4 +1,4 @@
-from __future__ import annotations
+from__future__import annotations
 
 from io import BytesIO
 from pathlib import Path
