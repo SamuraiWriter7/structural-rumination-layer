@@ -148,3 +148,26 @@ In Japanese:
 This is the first candidate release of Structural Rumination Layer.
 
 The purpose of this version is to establish the minimum digestive structure for AI-assisted GitHub specification work before expanding the repository.
+
+## [0.2.0-candidate] - 2026-06-14
+
+### Added
+
+- Added `rules/recurrence-rules.yaml` as the initial executable recurrence rule registry.
+- Added `scripts/check_recurrence_rules.py` to validate the recurrence rule registry.
+- Added `scripts/check_workflow_structure.py` to detect recurring GitHub Actions workflow structure issues.
+- Added `scripts/check_yaml_lists.py` to detect malformed YAML list marker contamination.
+- Added `scripts/check_json_schema_syntax.py` to ensure JSON Schema files are parseable as strict JSON.
+- Added `scripts/check_python_syntax.py` to detect Python syntax errors and suspicious dunder corruption patterns.
+- Introduced the v0.2 theme: **Executable Recurrence Rules**.
+
+### Changed
+
+- Extended the project from passive Structural Rumination Records toward executable recurrence checks.
+- Reframed recorded implementation failures as reusable recurrence prevention rules.
+- Updated the validation flow to include executable recurrence rule checks.
+
+### Validated
+
+- Confirmed that GitHub Actions passes with the v0.2 executable recurrence checks enabled.
+- Confirmed that previously observed error patterns have been converted into structural recurrence checks.
