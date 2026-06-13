@@ -1,0 +1,54 @@
+hook_id: "aarh-2026-06-14-001"
+version: "0.4.0-candidate"
+
+agent:
+  id: "agent-doc-release-helper"
+  name: "Documentation and Release Helper"
+  type: "documentation_agent"
+  scope: "README, CHANGELOG, docs, release notes"
+
+hook_type: "pre_release"
+
+execution_boundary:
+  trigger: "Before cutting a candidate release tag"
+  target_scope: "Repository documentation, schema/example validation, and recurrence checks"
+  blocking_mode: "human_review_required"
+
+linked_rumination:
+  recurrence_rule_ids:
+    - "workflow-steps-indentation"
+    - "json-schema-backslash-escaping"
+    - "yaml-asterisk-list-contamination"
+  rumination_record_refs:
+    - "examples/rumination-record.example.yaml"
+  multi_wing_link_refs:
+    - "examples/multi-wing-rumination-link.example.yaml"
+
+hook_action:
+  action_type: "request_validation"
+  description: >
+    Before the agent recommends a candidate release tag, it must confirm
+    that recurrence checks, schema/example validation, README updates, and
+    CHANGELOG updates are aligned.
+  suggested_next_step: >
+    Run the full validation suite and confirm that README and CHANGELOG
+    describe only files and checks that exist in the repository.
+
+validation:
+  status: "manual_review_required"
+  evidence:
+    - "Executable recurrence checks should pass before candidate release."
+    - "Schema/example pairs should validate successfully."
+    - "README and CHANGELOG should match actual repository state."
+
+human_review:
+  required: true
+  reason: >
+    Candidate release tagging is a high-impact repository boundary. The AI
+    agent may recommend next steps, but human review should confirm final
+    release readiness.
+  reviewer_role: "repository maintainer"
+
+notes: >
+  This example shows how recurrence rules and multi-wing rumination links
+  can be connected to an AI agent's pre-release execution boundary.
