@@ -1,21 +1,19 @@
 from __future__ import annotations
 
+from io import BytesIO
 from pathlib import Path
 import py_compile
 import sys
+import tokenize
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = REPO_ROOT / "scripts"
 
-SUSPICIOUS_DUNDER_PATTERNS = (
-    "__ future__",
-    "__future __",
+MALFORMED_DUNDER_IDENTIFIER_NAMES = {
     "_future_",
-    "__ file__",
-    "__file __",
     "_file_",
-)
+}
 
 
 def fail(message: str) -> None:
@@ -23,14 +21,23 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
-def check_suspicious_dunders(path: Path) -> None:
-    text = path.read_text(encoding="utf-8")
+def check_malformed_identifier_names(path: Path) -> None:
+    source = path.read_bytes()
 
-    for pattern in SUSPICIOUS_DUNDER_PATTERNS:
-        if pattern in text:
+    try:
+        tokens = tokenize.tokenize(BytesIO(source).readline)
+    except tokenize.TokenError as exc:
+        fail(f"{path}: tokenization failed: {exc}")
+
+    for token in tokens:
+        if token.type != tokenize.NAME:
+            continue
+
+        if token.string in MALFORMED_DUNDER_IDENTIFIER_NAMES:
+            line, column = token.start
             fail(
-                f"{path}: suspicious dunder-like pattern found: {pattern!r}. "
-                "Check __future__ or __file__ spelling."
+                f"{path}:{line}:{column + 1}: suspicious malformed identifier "
+                f"found: {token.string!r}. Check __future__ or __file__ spelling."
             )
 
 
@@ -41,6 +48,11 @@ def check_compile(path: Path) -> None:
         fail(f"{path}: Python syntax check failed:\n{exc.msg}")
 
 
+def check_file(path: Path) -> None:
+    check_malformed_identifier_names(path)
+    check_compile(path)
+
+
 def main() -> None:
     if not SCRIPTS_DIR.exists():
         print("[python-syntax] OK: no scripts directory found")
@@ -49,11 +61,11 @@ def main() -> None:
     python_paths = sorted(SCRIPTS_DIR.glob("*.py"))
 
     for path in python_paths:
-        check_suspicious_dunders(path)
-        check_compile(path)
+        check_file(path)
 
     print(f"[python-syntax] OK: checked {len(python_paths)} Python script file(s)")
 
 
 if __name__ == "__main__":
     main()
+
