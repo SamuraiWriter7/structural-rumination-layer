@@ -123,6 +123,10 @@ def main() -> int:
     "examples/ai-agent-rumination-hook.example.yaml",
 ),
 
+(
+    "schemas/pre-release-rumination-gate.schema.json",
+    "examples/pre-release-rumination-gate.example.yaml",
+),
 
 if __name__ == "__main__":
     sys.exit(main())
