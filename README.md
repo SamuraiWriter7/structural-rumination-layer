@@ -4,32 +4,33 @@
 
 It does not aim to make AI perfectly error-free.
 
-Instead, it helps AI systems and human operators verify outputs, reflect on mistakes, ruminate on repeated error patterns, and rebalance the workflow before moving forward.
+Instead, it helps AI systems and human operators verify outputs, reflect on mistakes, ruminate on repeated error patterns, convert them into recurrence-prevention rules, and share those rules across multiple structural wings.
 
 In short:
 
-> Mistakes may occur.  
+> Mistakes may occur.
 > But the same structural mistake should not pass through the workflow unchanged twice.
 
 日本語では：
 
-> ミスは起こる。  
+> ミスは起こる。
 > だが、同じ構造的過ちは二度通さない。
 
 ---
 
 ## Purpose
 
-AI systems can generate advanced reasoning, documentation, schemas, examples, and release notes.
+AI systems can generate advanced reasoning, documentation, schemas, examples, validators, and release notes.
 
 However, in practical GitHub specification work, they may still repeat basic structural mistakes, such as:
 
-- referencing files that do not exist,
-- adding validator targets before schema/example pairs are complete,
-- drifting between README, CHANGELOG, and actual repository state,
-- assuming `.github/workflows` exists when it does not,
-- producing polished documentation before verifying concrete file paths,
-- pushing repeated debugging work back onto the human operator.
+* referencing files that do not exist,
+* adding validator targets before schema/example pairs are complete,
+* drifting between README, CHANGELOG, and actual repository state,
+* assuming `.github/workflows` exists when it does not,
+* producing polished documentation before verifying concrete file paths,
+* repeating YAML / JSON / Python syntax mistakes during rapid iteration,
+* pushing repeated debugging work back onto the human operator.
 
 This repository defines a minimal protocol for digesting those errors instead of merely correcting them once.
 
@@ -37,119 +38,162 @@ The goal is not binary perfection.
 
 The goal is:
 
-> Bias correction, recurrence reduction, and human burden reduction through structured rumination.
+> Bias correction, recurrence reduction, cross-wing failure sharing, and human burden reduction through structured rumination.
 
 ---
 
 ## Core Concept
 
-Structural Rumination Layer treats AI errors as something to be **verified, reflected on, digested, and converted into recurrence-prevention rules**.
+`structural-rumination-layer` is a minimal OS for treating AI development failures not as disposable logs, but as structural data that can be recorded, digested, converted into recurrence-prevention rules, and shared across wings.
+
+The project evolves through these layers:
+
+```text
+v0.1 = Structural Rumination Record
+       Failure becomes structured memory.
+
+v0.2 = Executable Recurrence Rules
+       Structured memory becomes executable prevention.
+
+v0.3 = Multi-Wing Integration
+       Recurrence knowledge becomes shareable across wings.
+```
+
+In metaphorical terms:
+
+```text
+v0.1 = digestive layer
+v0.2 = first immune response
+v0.3 = cross-wing nervous system
+```
+
+---
+
+## Core Lifecycle
 
 The core lifecycle is:
 
 ```text
 Forward Generation
-→ Reverse Trace Check
-→ Verification
-→ Reflection
-→ Rumination
-→ Breathing Alignment
-→ Error Visibility
-→ Next-Gate Registration
+  -> Reverse Trace Check
+  -> Verification
+  -> Reflection
+  -> Rumination
+  -> Breathing Alignment
+  -> Error Visibility
+  -> Next-Gate Registration
+```
 
 This turns AI-assisted work from a simple output loop into a learning workflow.
 
-Core Lifecycle
-1. Forward Generation
+---
+
+## 1. Forward Generation
 
 The workflow moves from intention to output.
 
+```text
 Objective
-→ Schema
-→ Example
-→ Validator
-→ Documentation
-→ Changelog
-→ Release
+  -> Schema
+  -> Example
+  -> Validator
+  -> Documentation
+  -> Changelog
+  -> Release
+```
 
 Forward generation is useful for creating artifacts, but it can also cause AI systems to move too quickly.
 
-Without later inspection, this can lead to beautiful but inconsistent output.
+Without later inspection, this can lead to polished but inconsistent output.
 
-2. Reverse Trace Check
+---
+
+## 2. Reverse Trace Check
 
 The workflow is then checked backward.
 
+```text
 Release
-→ Changelog
-→ Documentation
-→ Validator
-→ Example
-→ Schema
-→ Objective
+  -> Changelog
+  -> Documentation
+  -> Validator
+  -> Example
+  -> Schema
+  -> Objective
+```
 
 Reverse trace checks whether the final output can be traced back to the original intention without broken links, missing files, or unsupported assumptions.
 
 This is the “思考の巻き戻し” layer.
 
-3. Verification
+---
+
+## 3. Verification
 
 Verification checks what actually happened.
 
 Examples:
 
-Did the referenced file exist?
-Did the validator pass?
-Did the example match the schema?
-Did README match the real repository structure?
-Did CHANGELOG match the actual changes?
+* Did the referenced file exist?
+* Did the validator pass?
+* Did the example match the schema?
+* Did README match the real repository structure?
+* Did CHANGELOG match the actual changes?
+* Did the executable recurrence checks pass?
 
 Verification is the eye of the workflow.
 
 It sees the concrete state before interpretation begins.
 
-4. Reflection
+---
+
+## 4. Reflection
 
 Reflection identifies why the error happened.
 
 Examples:
 
-Was repository state assumed before checking?
-Was a validator target added too early?
-Was README updated before file paths were confirmed?
-Was a previous error pattern ignored?
-Did the burden shift back to the human operator?
+* Was repository state assumed before checking?
+* Was a validator target added too early?
+* Was README updated before file paths were confirmed?
+* Was a previous error pattern ignored?
+* Did the burden shift back to the human operator?
 
 Reflection is not about apology.
 
 It is about cause classification.
 
-5. Rumination
+---
+
+## 5. Rumination
 
 Rumination converts the lesson into a recurrence-prevention rule.
 
 Examples:
 
-Do not reference a path unless the file tree confirms it.
-Do not add validator targets until schema and example both exist.
-Do not propose workflow edits before confirming workflow existence.
-Do not proceed to release if README and CHANGELOG drift from actual files.
+* Do not reference a path unless the file tree confirms it.
+* Do not add validator targets until schema and example both exist.
+* Do not propose workflow edits before confirming workflow existence.
+* Do not proceed to release if README and CHANGELOG drift from actual files.
+* Do not allow the same structural error to recur without a new rule.
 
 Rumination is the digestive layer of the workflow.
 
 It turns mistakes into future guardrails.
 
-6. Breathing Alignment
+---
+
+## 6. Breathing Alignment
 
 Breathing Alignment calms and rebalances the workflow before proceeding.
 
 It asks:
 
-Is the output too large?
-Is uncertainty visible?
-Has human burden been reduced?
-Is the next step clear?
-Is the workflow lighter than before?
+* Is the output too large?
+* Is uncertainty visible?
+* Has human burden been reduced?
+* Is the next step clear?
+* Is the workflow lighter than before?
 
 This prevents reflection from becoming rigid perfectionism.
 
@@ -157,164 +201,344 @@ The purpose is not to punish errors.
 
 The purpose is to restore flow.
 
-7. Error Visibility
+---
+
+## 7. Error Visibility
 
 Errors must be visible before they can be digested.
 
 The final check should make the following clear:
 
-What error occurred?
-Why did it occur?
-What burden did it create?
-What recurrence rule prevents it?
-What uncertainty remains?
+* What error occurred?
+* Why did it occur?
+* What burden did it create?
+* What recurrence rule prevents it?
+* What uncertainty remains?
+* Can this recurrence pattern help another wing?
 
-Invisible errors cannot become reflection, rumination, or recurrence prevention.
+Invisible errors cannot become reflection, rumination, recurrence prevention, or cross-wing learning.
 
-Rumination Sieve
+---
+
+## Rumination Sieve
 
 Structural errors are passed through three sieve layers.
 
 This is the protocol version of 三度目の正直.
 
+```text
 Pass 1: Existence Check
 Pass 2: Consistency Check
 Pass 3: Recurrence Check
-Pass 1: Existence Check
+```
+
+### Pass 1: Existence Check
 
 Question:
 
-Do the referenced files and paths actually exist?
+> Do the referenced files and paths actually exist?
 
 Examples:
 
-Does the schema exist?
-Does the example exist?
-Does the docs path exist?
-Does .github/workflows exist before referencing it?
-Pass 2: Consistency Check
+* Does the schema exist?
+* Does the example exist?
+* Does the docs path exist?
+* Does `.github/workflows` exist before referencing it?
+
+### Pass 2: Consistency Check
 
 Question:
 
-Do the artifacts align with each other?
+> Do the artifacts align with each other?
 
 Examples:
 
-Does README match the real file tree?
-Does CHANGELOG match actual changes?
-Does validator reference existing schema/example pairs?
-Does the example conform to the schema?
-Pass 3: Recurrence Check
+* Does README match the real file tree?
+* Does CHANGELOG match actual changes?
+* Does the validator reference existing schema/example pairs?
+* Does the example conform to the schema?
+
+### Pass 3: Recurrence Check
 
 Question:
 
-Is this the same structural error pattern as before?
+> Is this the same structural error pattern as before?
 
 Examples:
 
-repeated path mismatch,
-repeated validator target mismatch,
-repeated workflow assumption,
-repeated README/file-tree drift,
-repeated human-side debugging burden.
+* repeated path mismatch,
+* repeated validator target mismatch,
+* repeated workflow assumption,
+* repeated README/file-tree drift,
+* repeated human-side debugging burden,
+* repeated YAML / JSON / Python syntax corruption.
 
 A workflow should not proceed if the same structural error pattern appears again without a new recurrence-prevention rule.
 
-Repository Structure
+---
+
+## v0.1 — Structural Rumination Record
+
+v0.1 defines the first minimal structure for recording, digesting, and reducing repeated structural errors in AI-assisted specification workflows.
+
+It introduces:
+
+* the core rumination lifecycle,
+* the Rumination Sieve,
+* final error visibility checks,
+* a structural rumination schema,
+* a validated example,
+* local example validation,
+* initial GitHub Actions validation.
+
+In short:
+
+```text
+v0.1 = record and digest failure
+```
+
+---
+
+## v0.2 — Executable Recurrence Rules
+
+As of v0.2, `structural-rumination-layer` extends Structural Rumination Records into executable recurrence checks.
+
+The project no longer treats implementation failures as passive logs.
+
+Instead, repeated failure patterns are converted into rule definitions and validation scripts that can detect similar errors before release.
+
+In short:
+
+```text
+v0.2 = detect recurrence
+```
+
+### What v0.2 adds
+
+* `rules/recurrence-rules.yaml`
+
+  * Defines recurrence patterns and executable recurrence rules.
+* `scripts/check_recurrence_rules.py`
+
+  * Validates the recurrence rule registry itself.
+* `scripts/check_workflow_structure.py`
+
+  * Detects recurring GitHub Actions workflow structure problems.
+* `scripts/check_yaml_lists.py`
+
+  * Detects malformed YAML list contamination such as unquoted `*` markers.
+* `scripts/check_json_schema_syntax.py`
+
+  * Ensures JSON Schema files are parseable as strict JSON.
+* `scripts/check_python_syntax.py`
+
+  * Checks Python scripts for syntax errors and suspicious dunder corruption patterns.
+* `docs/executable-recurrence-rules.md`
+
+  * Explains how recurrence patterns become executable validation checks.
+
+These checks are derived from actual implementation failures encountered during the development of this repository, including workflow indentation issues, Python syntax corruption, JSON escaping errors, and YAML list marker contamination.
+
+---
+
+## v0.3 — Multi-Wing Integration
+
+As of v0.3, `structural-rumination-layer` extends recurrence knowledge across multiple wings.
+
+A wing may be:
+
+* a GitHub repository,
+* an AI agent,
+* a GPT configuration,
+* a validator,
+* a schema module,
+* a documentation layer,
+* a governance layer,
+* another structural protocol implementation.
+
+The goal is to allow one wing’s failure pattern to become another wing’s prevention signal.
+
+In short:
+
+```text
+v0.3 = share recurrence knowledge across wings
+```
+
+### What v0.3 adds
+
+* `docs/multi-wing-integration.md`
+
+  * Explains how recurrence knowledge can move across repositories, agents, validators, and structural protocol layers.
+* `schemas/multi-wing-rumination-link.schema.json`
+
+  * Defines a schema for linking recurrence patterns and recurrence rules across multiple wings.
+* `examples/multi-wing-rumination-link.example.yaml`
+
+  * Provides a validated example of a recurrence rule being adapted from one wing to another.
+* `scripts/validate_examples.py`
+
+  * Now validates both the original rumination record and the multi-wing rumination link example.
+
+v0.3 turns local recurrence prevention into cross-wing immune memory.
+
+A failure pattern discovered in one context can now become a structural warning, reference, or adapted check in another.
+
+---
+
+## Repository Structure
+
+```text
 docs/
-  rumination-sieve-protocol.md
+  executable-recurrence-rules.md
   final-error-visibility-check.md
+  multi-wing-integration.md
+  rumination-sieve-protocol.md
+
+rules/
+  recurrence-rules.yaml
 
 schemas/
+  multi-wing-rumination-link.schema.json
   rumination-record.schema.json
 
 examples/
+  multi-wing-rumination-link.example.yaml
   rumination-record.example.yaml
 
 scripts/
+  check_json_schema_syntax.py
+  check_python_syntax.py
+  check_recurrence_rules.py
+  check_workflow_structure.py
+  check_yaml_lists.py
   validate_examples.py
+
+.github/
+  workflows/
+    validate-examples.yml
 
 README.md
 CHANGELOG.md
-Schema
+```
 
-The first schema defined by this repository is:
+---
 
+## Key Documents
+
+* [`docs/rumination-sieve-protocol.md`](docs/rumination-sieve-protocol.md)
+
+  * Explains the three-pass structural rumination sieve.
+* [`docs/final-error-visibility-check.md`](docs/final-error-visibility-check.md)
+
+  * Defines the final visibility check before moving forward.
+* [`docs/executable-recurrence-rules.md`](docs/executable-recurrence-rules.md)
+
+  * Explains how recorded recurrence patterns become executable validation checks.
+* [`docs/multi-wing-integration.md`](docs/multi-wing-integration.md)
+
+  * Explains how recurrence knowledge can be shared across wings.
+
+---
+
+## Schemas
+
+### Rumination Record
+
+```text
 schemas/rumination-record.schema.json
+```
 
-It records:
+Records:
 
-repository scope,
-forward trace,
-reverse trace,
-verification results,
-reflection root causes,
-rumination rules,
-breathing alignment state,
-visible error summary,
-next-gate conditions.
-Example
+* repository scope,
+* forward trace,
+* reverse trace,
+* verification results,
+* reflection root causes,
+* rumination rules,
+* breathing alignment state,
+* visible error summary,
+* next-gate conditions.
 
-The first example is:
+### Multi-Wing Rumination Link
 
+```text
+schemas/multi-wing-rumination-link.schema.json
+```
+
+Records:
+
+* source wing,
+* target wing,
+* link type,
+* linked recurrence rule,
+* adaptation status,
+* validation status,
+* human review boundary,
+* notes.
+
+---
+
+## Examples
+
+### Rumination Record Example
+
+```text
 examples/rumination-record.example.yaml
+```
 
-It demonstrates how to record a repeated structural error pattern and convert it into a recurrence-prevention rule.
+Demonstrates how to record a repeated structural error pattern and convert it into a recurrence-prevention rule.
 
-Validation
+### Multi-Wing Rumination Link Example
+
+```text
+examples/multi-wing-rumination-link.example.yaml
+```
+
+Demonstrates how a recurrence rule from one wing can be referenced, adapted, or reused by another wing.
+
+---
+
+## Validation
 
 Install dependencies:
 
+```bash
 pip install jsonschema pyyaml
+```
 
-Run local validation:
+Run the full local validation suite:
 
+```bash
+python scripts/check_recurrence_rules.py
+python scripts/check_workflow_structure.py
+python scripts/check_yaml_lists.py
+python scripts/check_json_schema_syntax.py
+python scripts/check_python_syntax.py
 python scripts/validate_examples.py
+```
 
-Expected output:
+Expected result:
 
-Structural Rumination Layer example validation
-========================================================
-[PASS] examples/rumination-record.example.yaml
+```text
+All checks pass.
+```
 
-All examples passed.
-Design Philosophy
+These checks validate:
 
-This repository rejects binary perfectionism.
+* the recurrence rule registry,
+* GitHub Actions workflow structure,
+* YAML list marker hygiene,
+* JSON Schema syntax,
+* Python syntax and suspicious dunder corruption patterns,
+* schema/example consistency,
+* multi-wing rumination link examples.
 
-It does not say:
-
-AI must never make mistakes.
-
-Instead, it says:
-
-Mistakes may occur.
-Repeated structural mistakes must be digested.
-The workflow must become lighter after each cycle.
-
-The goal is not zero error.
-
-The goal is reduced recurrence, reduced human burden, and better structural digestion.
-
-Relationship to AI-Assisted GitHub Specification Work
-
-This protocol is intended for workflows involving:
-
-JSON Schema design,
-YAML examples,
-local validators,
-README updates,
-CHANGELOG updates,
-release notes,
-repository structure validation,
-AI-assisted documentation,
-recurring error pattern management.
-
-It is especially useful when AI systems repeatedly produce plausible but structurally inconsistent outputs.
+---
 
 ## Continuous Validation
 
-This repository includes a minimal GitHub Actions workflow for validating confirmed schema/example pairs.
+This repository includes a minimal GitHub Actions workflow for validating confirmed schema/example pairs and recurrence checks.
 
 Workflow:
 
@@ -328,23 +552,19 @@ The workflow runs on:
 * pull requests targeting `main`,
 * manual dispatch.
 
-It performs the same local validation used by the repository:
-
-```bash
-python scripts/validate_examples.py
-```
-
 The workflow intentionally remains small.
 
-It does not attempt to automate release generation, package publishing, or multi-schema validation yet.
+It does not attempt to automate release generation, package publishing, or broad multi-repository execution yet.
 
 Its purpose is narrower:
 
-> Keep the first rumination loop executable, visible, and stable.
+> Keep the rumination loop executable, visible, and stable.
+
+---
 
 ## CI Status
 
-The v0.1 validation workflow has passed after resolving the first set of structural rumination errors.
+The validation workflow has passed after resolving and digesting the first set of structural rumination errors.
 
 The first-generation errors digested during this process included:
 
@@ -362,84 +582,129 @@ In short:
 
 > The repository has already begun using its own protocol to digest its own structural errors.
 
+---
 
-Minimal v0.1 Scope
+## Design Philosophy
 
-Version v0.1.0-candidate intentionally keeps the scope small.
+This repository rejects binary perfectionism.
 
-Included:
+It does not say:
 
-core concept,
-rumination lifecycle,
-rumination sieve,
-final error visibility check,
-one schema,
-one example,
-one local validation script.
+> AI must never make mistakes.
+
+Instead, it says:
+
+> Mistakes may occur.
+> Repeated structural mistakes must be digested.
+> Recurrence rules must become executable.
+> Useful failure knowledge should be shareable across wings.
+> The workflow must become lighter after each cycle.
+
+The goal is not zero error.
+
+The goal is reduced recurrence, reduced human burden, and better structural digestion.
+
+---
+
+## Relationship to AI-Assisted GitHub Specification Work
+
+This protocol is intended for workflows involving:
+
+* JSON Schema design,
+* YAML examples,
+* local validators,
+* README updates,
+* CHANGELOG updates,
+* release notes,
+* repository structure validation,
+* AI-assisted documentation,
+* recurring error pattern management,
+* multi-agent or multi-repository specification work.
+
+It is especially useful when AI systems repeatedly produce plausible but structurally inconsistent outputs.
+
+---
+
+## Minimal Scope
+
+This repository intentionally grows in small verified steps.
+
+Current scope:
+
+```text
+v0.1 = Structural Rumination Record
+v0.2 = Executable Recurrence Rules
+v0.3 = Multi-Wing Integration
+```
 
 Not included yet:
 
-GitHub Actions workflow,
-multiple schemas,
-automated release generation,
-badge system,
-external package publishing.
+* automated release generation,
+* external package publishing,
+* full multi-repository orchestration,
+* AI agent runtime hooks,
+* automatic rule propagation across repositories.
 
-This prevents the first version from repeating the very error it is designed to reduce: adding structure faster than it can be verified.
+These are deferred to avoid adding structure faster than it can be verified.
 
-Status
+---
+
+## Version Position
+
+```text
+v0.1 = Structural Rumination Record
+       Failure is recorded and digested.
+
+v0.2 = Executable Recurrence Rules
+       Failure is converted into executable recurrence checks.
+
+v0.3 = Multi-Wing Integration
+       Failure knowledge is linked across structural wings.
+
+v0.4 = AI Agent Hooks
+       Recurrence checks may connect to AI agent execution boundaries.
+```
+
+---
+
+## Status
 
 Current version:
 
-v0.1.0-candidate
+```text
+v0.3.0-candidate
+```
 
-This version defines the first minimal structure for recording, digesting, and reducing repeated structural errors in AI-assisted specification workflows.
+This version introduces the first validated structure for sharing recurrence knowledge across multiple wings.
 
-Summary
+---
 
-Structural Rumination Layer exists to give AI-assisted work a digestive system.
+## Summary
+
+Structural Rumination Layer exists to give AI-assisted work a digestive system, an immune response, and the beginning of a nervous system.
 
 It helps transform:
 
+```text
 Output
-→ Error
-→ Correction
-→ Repeated Error
+  -> Error
+  -> Correction
+  -> Repeated Error
+```
 
 into:
 
+```text
 Output
-→ Error Visibility
-→ Reflection
-→ Rumination
-→ Recurrence Prevention
-→ Lighter Workflow
+  -> Error Visibility
+  -> Reflection
+  -> Rumination
+  -> Recurrence Prevention
+  -> Cross-Wing Learning
+  -> Lighter Workflow
+```
 
 In one sentence:
 
-Verify with the eyes, reflect with the mind, ruminate with the stomach, and align the breath before moving forward.
+> Verify with the eyes, reflect with the mind, ruminate with the stomach, circulate through the wings, and align the breath before moving forward.
 
-## v0.2 — Executable Recurrence Rules
-
-As of v0.2, `structural-rumination-layer` extends Structural Rumination Records into executable recurrence checks.
-
-The project no longer treats implementation failures as passive logs. Instead, repeated failure patterns are converted into rule definitions and validation scripts that can detect similar errors before release.
-
-In this sense, v0.1 introduced the digestive layer for structural failure, while v0.2 introduces the first immune response.
-
-### What v0.2 adds
-
-- `rules/recurrence-rules.yaml`
-  - Defines recurrence patterns and executable recurrence rules.
-- `scripts/check_recurrence_rules.py`
-  - Validates the recurrence rule registry itself.
-- `scripts/check_workflow_structure.py`
-  - Detects recurring GitHub Actions workflow structure problems.
-- `scripts/check_yaml_lists.py`
-  - Detects malformed YAML list contamination such as unquoted `*` markers.
-- `scripts/check_json_schema_syntax.py`
-  - Ensures JSON Schema files are parseable as strict JSON.
-- `scripts/check_python_syntax.py`
-  - Checks Python scripts for syntax errors and suspicious dunder corruption patterns.
-
-These checks are derived from actual implementation failures encountered during the development of this repository, including workflow indentation issues, Python syntax corruption, JSON escaping errors, and YAML list marker contamination.
