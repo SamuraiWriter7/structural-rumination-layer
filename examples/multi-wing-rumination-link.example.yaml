@@ -1,0 +1,52 @@
+link_id: "mwrl-2026-06-14-001"
+version: "0.3.0-candidate"
+
+source_wing:
+  id: "wing-structural-rumination-layer"
+  name: "structural-rumination-layer"
+  type: "repository"
+  uri: "https://github.com/SamuraiWriter7/structural-rumination-layer"
+
+target_wing:
+  id: "wing-future-schema-repository"
+  name: "future-schema-repository"
+  type: "repository"
+  uri: "https://example.org/future-schema-repository"
+
+link_type: "rule_adaptation"
+
+linked_recurrence_rule:
+  rule_id: "yaml-asterisk-list-contamination"
+  source_failure: "YAML '*' list contamination"
+  recurrence_pattern: >
+    Markdown-style or malformed list markers using '*' enter YAML files
+    and are interpreted as aliases or invalid YAML structures.
+  recurrence_rule: >
+    YAML example files must not use unquoted '*' as a list marker.
+  source_registry: "rules/recurrence-rules.yaml"
+
+adaptation:
+  status: "requires_adaptation"
+  notes: >
+    The target wing also contains YAML example files, but its examples are
+    stored under fixtures/ instead of examples/. The rule is structurally
+    reusable, but the target path should be adapted.
+  adapted_check: "scripts/check_yaml_lists.py"
+
+validation:
+  status: "manual_review_required"
+  evidence:
+    - "Source rule exists in rules/recurrence-rules.yaml."
+    - "Target wing contains YAML example-like files."
+    - "Path adaptation is required before execution."
+
+human_review:
+  required: true
+  reason: >
+    The recurrence rule is portable, but target-specific file paths must be
+    reviewed before enabling the check.
+  reviewer_role: "repository maintainer"
+
+notes: >
+  This link demonstrates how a failure pattern digested in one wing can
+  become recurrence-prevention knowledge for another wing.
