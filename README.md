@@ -4,7 +4,7 @@
 
 It does not aim to make AI perfectly error-free.
 
-Instead, it helps AI systems and human operators verify outputs, reflect on mistakes, ruminate on repeated error patterns, convert them into recurrence-prevention rules, and share those rules across multiple structural wings.
+Instead, it helps AI systems and human operators verify outputs, reflect on mistakes, ruminate on repeated error patterns, convert them into recurrence-prevention rules, share those rules across multiple structural wings, and connect them to AI agent execution boundaries.
 
 In short:
 
@@ -30,6 +30,7 @@ However, in practical GitHub specification work, they may still repeat basic str
 * assuming `.github/workflows` exists when it does not,
 * producing polished documentation before verifying concrete file paths,
 * repeating YAML / JSON / Python syntax mistakes during rapid iteration,
+* recommending releases before validation evidence is complete,
 * pushing repeated debugging work back onto the human operator.
 
 This repository defines a minimal protocol for digesting those errors instead of merely correcting them once.
@@ -38,13 +39,13 @@ The goal is not binary perfection.
 
 The goal is:
 
-> Bias correction, recurrence reduction, cross-wing failure sharing, and human burden reduction through structured rumination.
+> Bias correction, recurrence reduction, cross-wing failure sharing, AI agent boundary checks, and human burden reduction through structured rumination.
 
 ---
 
 ## Core Concept
 
-`structural-rumination-layer` is a minimal OS for treating AI development failures not as disposable logs, but as structural data that can be recorded, digested, converted into recurrence-prevention rules, and shared across wings.
+`structural-rumination-layer` is a minimal OS for treating AI development failures not as disposable logs, but as structural data that can be recorded, digested, converted into recurrence-prevention rules, shared across wings, and connected to AI agent execution boundaries.
 
 The project evolves through these layers:
 
@@ -57,6 +58,9 @@ v0.2 = Executable Recurrence Rules
 
 v0.3 = Multi-Wing Integration
        Recurrence knowledge becomes shareable across wings.
+
+v0.4 = AI Agent Hooks
+       Recurrence knowledge becomes agent-facing execution guidance.
 ```
 
 In metaphorical terms:
@@ -65,6 +69,7 @@ In metaphorical terms:
 v0.1 = digestive layer
 v0.2 = first immune response
 v0.3 = cross-wing nervous system
+v0.4 = agent-facing reflex layer
 ```
 
 ---
@@ -140,6 +145,7 @@ Examples:
 * Did README match the real repository structure?
 * Did CHANGELOG match the actual changes?
 * Did the executable recurrence checks pass?
+* Did the agent hook require human review before release?
 
 Verification is the eye of the workflow.
 
@@ -156,7 +162,8 @@ Examples:
 * Was repository state assumed before checking?
 * Was a validator target added too early?
 * Was README updated before file paths were confirmed?
-* Was a previous error pattern ignored?
+* Was a previous recurrence rule ignored?
+* Was an AI agent allowed to proceed without a boundary check?
 * Did the burden shift back to the human operator?
 
 Reflection is not about apology.
@@ -175,6 +182,7 @@ Examples:
 * Do not add validator targets until schema and example both exist.
 * Do not propose workflow edits before confirming workflow existence.
 * Do not proceed to release if README and CHANGELOG drift from actual files.
+* Do not recommend a candidate tag before validation evidence is available.
 * Do not allow the same structural error to recur without a new rule.
 
 Rumination is the digestive layer of the workflow.
@@ -194,6 +202,7 @@ It asks:
 * Has human burden been reduced?
 * Is the next step clear?
 * Is the workflow lighter than before?
+* Should an AI agent pause, warn, block, or ask for human review?
 
 This prevents reflection from becoming rigid perfectionism.
 
@@ -215,8 +224,9 @@ The final check should make the following clear:
 * What recurrence rule prevents it?
 * What uncertainty remains?
 * Can this recurrence pattern help another wing?
+* Should this recurrence pattern become an AI agent hook?
 
-Invisible errors cannot become reflection, rumination, recurrence prevention, or cross-wing learning.
+Invisible errors cannot become reflection, rumination, recurrence prevention, cross-wing learning, or agent-facing execution guidance.
 
 ---
 
@@ -271,7 +281,8 @@ Examples:
 * repeated workflow assumption,
 * repeated README/file-tree drift,
 * repeated human-side debugging burden,
-* repeated YAML / JSON / Python syntax corruption.
+* repeated YAML / JSON / Python syntax corruption,
+* repeated release recommendation before validation evidence.
 
 A workflow should not proceed if the same structural error pattern appears again without a new recurrence-prevention rule.
 
@@ -377,7 +388,7 @@ v0.3 = share recurrence knowledge across wings
   * Provides a validated example of a recurrence rule being adapted from one wing to another.
 * `scripts/validate_examples.py`
 
-  * Now validates both the original rumination record and the multi-wing rumination link example.
+  * Validates the multi-wing rumination link example.
 
 v0.3 turns local recurrence prevention into cross-wing immune memory.
 
@@ -385,10 +396,79 @@ A failure pattern discovered in one context can now become a structural warning,
 
 ---
 
+## v0.4 — AI Agent Hooks
+
+As of v0.4, `structural-rumination-layer` connects recurrence knowledge to AI agent execution boundaries.
+
+An AI agent should not only generate outputs.
+
+It should also pass through structural rumination boundaries before, during, and after execution.
+
+These boundaries are called **AI Agent Hooks**.
+
+In short:
+
+```text
+v0.4 = hook recurrence knowledge into AI agent execution
+```
+
+### What v0.4 adds
+
+* `docs/ai-agent-hooks.md`
+
+  * Explains how recurrence knowledge can be connected to AI agent execution boundaries.
+* `schemas/ai-agent-rumination-hook.schema.json`
+
+  * Defines a schema for representing AI agent rumination hooks.
+* `examples/ai-agent-rumination-hook.example.yaml`
+
+  * Provides a validated example of a pre-release agent hook.
+* `scripts/validate_examples.py`
+
+  * Validates the AI agent rumination hook example.
+
+### Hook types
+
+v0.4 defines the following hook types:
+
+* `pre_run`
+
+  * Runs before an AI agent begins a task.
+* `pre_write`
+
+  * Runs before an AI agent writes or modifies files.
+* `post_run`
+
+  * Runs after an AI agent completes a task.
+* `pre_release`
+
+  * Runs before a tag, release, or candidate state.
+* `failure_capture`
+
+  * Runs when an error occurs and may trigger rumination recording.
+
+### Hook actions
+
+An AI Agent Hook may:
+
+* allow execution,
+* warn,
+* block,
+* request validation,
+* create a rumination record,
+* escalate to human review.
+
+v0.4 turns recurrence knowledge into agent-facing execution guidance.
+
+It is the first step toward structural rumination gates for AI-assisted development.
+
+---
+
 ## Repository Structure
 
 ```text
 docs/
+  ai-agent-hooks.md
   executable-recurrence-rules.md
   final-error-visibility-check.md
   multi-wing-integration.md
@@ -398,10 +478,12 @@ rules/
   recurrence-rules.yaml
 
 schemas/
+  ai-agent-rumination-hook.schema.json
   multi-wing-rumination-link.schema.json
   rumination-record.schema.json
 
 examples/
+  ai-agent-rumination-hook.example.yaml
   multi-wing-rumination-link.example.yaml
   rumination-record.example.yaml
 
@@ -437,6 +519,9 @@ CHANGELOG.md
 * [`docs/multi-wing-integration.md`](docs/multi-wing-integration.md)
 
   * Explains how recurrence knowledge can be shared across wings.
+* [`docs/ai-agent-hooks.md`](docs/ai-agent-hooks.md)
+
+  * Explains how recurrence knowledge can be connected to AI agent execution boundaries.
 
 ---
 
@@ -477,6 +562,26 @@ Records:
 * human review boundary,
 * notes.
 
+### AI Agent Rumination Hook
+
+```text
+schemas/ai-agent-rumination-hook.schema.json
+```
+
+Records:
+
+* hook ID,
+* agent identity,
+* hook type,
+* execution boundary,
+* linked recurrence rules,
+* linked rumination records,
+* linked multi-wing references,
+* hook action,
+* validation status,
+* human review boundary,
+* notes.
+
 ---
 
 ## Examples
@@ -496,6 +601,14 @@ examples/multi-wing-rumination-link.example.yaml
 ```
 
 Demonstrates how a recurrence rule from one wing can be referenced, adapted, or reused by another wing.
+
+### AI Agent Rumination Hook Example
+
+```text
+examples/ai-agent-rumination-hook.example.yaml
+```
+
+Demonstrates how recurrence rules and multi-wing rumination links can be connected to an AI agent’s pre-release execution boundary.
 
 ---
 
@@ -532,7 +645,8 @@ These checks validate:
 * JSON Schema syntax,
 * Python syntax and suspicious dunder corruption patterns,
 * schema/example consistency,
-* multi-wing rumination link examples.
+* multi-wing rumination link examples,
+* AI agent rumination hook examples.
 
 ---
 
@@ -554,11 +668,11 @@ The workflow runs on:
 
 The workflow intentionally remains small.
 
-It does not attempt to automate release generation, package publishing, or broad multi-repository execution yet.
+It does not attempt to automate release generation, package publishing, broad multi-repository execution, or live AI agent orchestration yet.
 
 Its purpose is narrower:
 
-> Keep the rumination loop executable, visible, and stable.
+> Keep the rumination loop executable, visible, stable, and agent-aware.
 
 ---
 
@@ -598,11 +712,12 @@ Instead, it says:
 > Repeated structural mistakes must be digested.
 > Recurrence rules must become executable.
 > Useful failure knowledge should be shareable across wings.
+> AI agents should pass through structural rumination boundaries.
 > The workflow must become lighter after each cycle.
 
 The goal is not zero error.
 
-The goal is reduced recurrence, reduced human burden, and better structural digestion.
+The goal is reduced recurrence, reduced human burden, better structural digestion, and safer agent-assisted execution.
 
 ---
 
@@ -619,7 +734,8 @@ This protocol is intended for workflows involving:
 * repository structure validation,
 * AI-assisted documentation,
 * recurring error pattern management,
-* multi-agent or multi-repository specification work.
+* multi-agent or multi-repository specification work,
+* AI agent pre-run, pre-write, post-run, pre-release, and failure-capture boundaries.
 
 It is especially useful when AI systems repeatedly produce plausible but structurally inconsistent outputs.
 
@@ -635,6 +751,7 @@ Current scope:
 v0.1 = Structural Rumination Record
 v0.2 = Executable Recurrence Rules
 v0.3 = Multi-Wing Integration
+v0.4 = AI Agent Hooks
 ```
 
 Not included yet:
@@ -642,8 +759,9 @@ Not included yet:
 * automated release generation,
 * external package publishing,
 * full multi-repository orchestration,
-* AI agent runtime hooks,
-* automatic rule propagation across repositories.
+* live AI agent runtime integration,
+* automatic rule propagation across repositories,
+* autonomous blocking of external agent actions.
 
 These are deferred to avoid adding structure faster than it can be verified.
 
@@ -662,7 +780,7 @@ v0.3 = Multi-Wing Integration
        Failure knowledge is linked across structural wings.
 
 v0.4 = AI Agent Hooks
-       Recurrence checks may connect to AI agent execution boundaries.
+       Recurrence knowledge is connected to AI agent execution boundaries.
 ```
 
 ---
@@ -672,16 +790,16 @@ v0.4 = AI Agent Hooks
 Current version:
 
 ```text
-v0.3.0-candidate
+v0.4.0-candidate
 ```
 
-This version introduces the first validated structure for sharing recurrence knowledge across multiple wings.
+This version introduces the first validated structure for connecting recurrence knowledge to AI agent execution boundaries.
 
 ---
 
 ## Summary
 
-Structural Rumination Layer exists to give AI-assisted work a digestive system, an immune response, and the beginning of a nervous system.
+Structural Rumination Layer exists to give AI-assisted work a digestive system, an immune response, a cross-wing nervous system, and the beginning of an agent-facing reflex layer.
 
 It helps transform:
 
@@ -701,10 +819,12 @@ Output
   -> Rumination
   -> Recurrence Prevention
   -> Cross-Wing Learning
+  -> Agent Boundary Check
   -> Lighter Workflow
 ```
 
 In one sentence:
 
-> Verify with the eyes, reflect with the mind, ruminate with the stomach, circulate through the wings, and align the breath before moving forward.
+> Verify with the eyes, reflect with the mind, ruminate with the stomach, circulate through the wings, hook into the agent boundary, and align the breath before moving forward.
+
 
