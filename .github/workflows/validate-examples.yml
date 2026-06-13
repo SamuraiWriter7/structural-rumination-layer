@@ -1,47 +1,46 @@
 name: Validate Examples
 
 on:
-push:
-branches:
-- main
-pull_request:
-branches:
-- main
-workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
-contents: read
+  contents: read
 
 jobs:
-validate-examples:
-name: Validate schema/example pairs
-runs-on: ubuntu-latest
+  validate-examples:
+    name: Validate schema/example pairs
+    runs-on: ubuntu-latest
 
-```
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
 
-  - name: Set up Python
-    uses: actions/setup-python@v6
-    with:
-      python-version: "3.12"
-      cache: "pip"
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
 
-  - name: Install validation dependencies
-    run: |
-      python -m pip install --upgrade pip
-      python -m pip install jsonschema pyyaml
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema pyyaml
 
-  - name: Run local validation script
-    run: |
-      python scripts/validate_examples.py
+      - name: Run local validation script
+        run: |
+          python scripts/validate_examples.py
 
-  - name: Final error visibility note
-    if: always()
-    run: |
-      echo "Final Error Visibility Check:"
-      echo "- Validator scope should remain limited to confirmed schema/example pairs."
-      echo "- Do not proceed to release if validation failed."
-      echo "- Surface repeated structural errors before tagging."
-```
+      - name: Final error visibility note
+        if: always()
+        run: |
+          echo "Final Error Visibility Check:"
+          echo "- Validator scope should remain limited to confirmed schema/example pairs."
+          echo "- Do not proceed to release if validation failed."
+          echo "- Surface repeated structural errors before tagging."
+
