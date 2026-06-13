@@ -312,6 +312,57 @@ recurring error pattern management.
 
 It is especially useful when AI systems repeatedly produce plausible but structurally inconsistent outputs.
 
+## Continuous Validation
+
+This repository includes a minimal GitHub Actions workflow for validating confirmed schema/example pairs.
+
+Workflow:
+
+```text
+.github/workflows/validate-examples.yml
+```
+
+The workflow runs on:
+
+* push to `main`,
+* pull requests targeting `main`,
+* manual dispatch.
+
+It performs the same local validation used by the repository:
+
+```bash
+python scripts/validate_examples.py
+```
+
+The workflow intentionally remains small.
+
+It does not attempt to automate release generation, package publishing, or multi-schema validation yet.
+
+Its purpose is narrower:
+
+> Keep the first rumination loop executable, visible, and stable.
+
+## CI Status
+
+The v0.1 validation workflow has passed after resolving the first set of structural rumination errors.
+
+The first-generation errors digested during this process included:
+
+* GitHub Actions `steps:` indentation drift,
+* `setup-python` cache assumptions without dependency files,
+* Python double-underscore name corruption during code transfer,
+* JSON Schema regex escape errors,
+* YAML list syntax corruption caused by Markdown-style `*` bullets.
+
+These were not treated as isolated fixes.
+
+They were treated as first-generation rumination records and converted into recurrence-prevention rules.
+
+In short:
+
+> The repository has already begun using its own protocol to digest its own structural errors.
+
+
 Minimal v0.1 Scope
 
 Version v0.1.0-candidate intentionally keeps the scope small.
