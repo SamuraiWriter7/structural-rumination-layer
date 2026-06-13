@@ -1,0 +1,123 @@
+version: "0.2.0-candidate"
+title: "Executable Recurrence Rules"
+description: >
+  A rule registry for converting structural rumination records into
+  executable recurrence checks. These rules are derived from actual
+  implementation failures observed during repository development.
+
+rules:
+  - id: "workflow-steps-indentation"
+    status: "active"
+    severity: "high"
+    source_failure: "GitHub Actions steps indentation error"
+    recurrence_pattern: >
+      A workflow job contains malformed or misplaced steps definitions,
+      causing GitHub Actions to fail before validation scripts can run.
+    recurrence_rule: >
+      Every workflow job that defines steps must declare steps as a list
+      under the job body with valid YAML indentation.
+    check:
+      script: "scripts/check_workflow_structure.py"
+      enabled: false
+    targets:
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
+    remediation: >
+      Move steps under the correct job key and ensure each step starts
+      with a properly indented list item.
+
+  - id: "setup-python-cache-configuration"
+    status: "active"
+    severity: "medium"
+    source_failure: "setup-python cache configuration error"
+    recurrence_pattern: >
+      The setup-python action is configured with cache settings that do
+      not match the repository dependency files.
+    recurrence_rule: >
+      When setup-python cache is enabled, the dependency path must exist
+      or the cache setting must be removed.
+    check:
+      script: "scripts/check_workflow_structure.py"
+      enabled: false
+    targets:
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
+    remediation: >
+      Ensure cache-dependency-path points to an existing requirements file,
+      or remove the cache configuration.
+
+  - id: "python-future-import-integrity"
+    status: "active"
+    severity: "high"
+    source_failure: "Python __future__ import corruption"
+    recurrence_pattern: >
+      Python files contain malformed future imports or corrupted dunder
+      identifiers, causing syntax or runtime failures.
+    recurrence_rule: >
+      Future imports must appear immediately after the module docstring
+      and before other imports or executable statements.
+    check:
+      script: "scripts/check_python_syntax.py"
+      enabled: false
+    targets:
+      - "scripts/*.py"
+    remediation: >
+      Place from __future__ imports at the top of the file after the
+      optional module docstring.
+
+  - id: "python-file-dunder-integrity"
+    status: "active"
+    severity: "medium"
+    source_failure: "Python __file__ corruption"
+    recurrence_pattern: >
+      The __file__ dunder variable is misspelled, corrupted, or replaced
+      with an invalid identifier during editing.
+    recurrence_rule: >
+      Python scripts that resolve paths relative to the current file must
+      use the exact __file__ identifier.
+    check:
+      script: "scripts/check_python_syntax.py"
+      enabled: false
+    targets:
+      - "scripts/*.py"
+    remediation: >
+      Replace malformed file dunder references with the exact __file__
+      identifier.
+
+  - id: "json-schema-backslash-escaping"
+    status: "active"
+    severity: "high"
+    source_failure: "JSON Schema backslash escaping error"
+    recurrence_pattern: >
+      JSON Schema files contain invalid escape sequences or broken
+      backslash usage, causing JSON parsing to fail.
+    recurrence_rule: >
+      All JSON Schema files must be parseable as strict JSON before schema
+      validation is attempted.
+    check:
+      script: "scripts/check_json_schema_syntax.py"
+      enabled: false
+    targets:
+      - "schemas/*.json"
+    remediation: >
+      Escape backslashes correctly and validate schema files with a strict
+      JSON parser.
+
+  - id: "yaml-asterisk-list-contamination"
+    status: "active"
+    severity: "medium"
+    source_failure: "YAML '*' list contamination"
+    recurrence_pattern: >
+      Markdown-style or malformed list markers using '*' enter YAML files
+      and are interpreted as aliases or invalid YAML structures.
+    recurrence_rule: >
+      YAML example files must not use unquoted '*' as a list marker.
+    check:
+      script: "scripts/check_yaml_lists.py"
+      enabled: false
+    targets:
+      - "examples/*.yaml"
+      - "examples/*.yml"
+    remediation: >
+      Use '-' for YAML list items, or quote literal asterisk characters
+      when they are intended as data.
