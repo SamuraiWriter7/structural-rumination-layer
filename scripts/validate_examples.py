@@ -118,6 +118,11 @@ def main() -> int:
     print("[RUMINATION] Do not proceed to release or tagging until the visible errors above are resolved.")
     return 1
 
+(
+    "schemas/ai-agent-rumination-hook.schema.json",
+    "examples/ai-agent-rumination-hook.example.yaml",
+),
+
 
 if __name__ == "__main__":
     sys.exit(main())
