@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/ai-agent-rumination-hook.schema.json",
+  "title": "AI Agent Rumination Hook",
+  "description": "A schema for connecting recurrence rules and rumination knowledge to AI agent execution boundaries.",
+  "type": "object",
+  "required": [
+    "hook_id",
+    "version",
+    "agent",
+    "hook_type",
+    "execution_boundary",
+    "linked_rumination",
+    "hook_action",
+    "validation",
+    "human_review"
+  ],
+  "properties": {
+    "hook_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "coding_agent",
+            "documentation_agent",
+            "validation_agent",
+            "release_agent",
+            "review_agent",
+            "gpt",
+            "other"
+          ]
+        },
+        "scope": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "hook_type": {
+      "type": "string",
+      "enum": [
+        "pre_run",
+        "pre_write",
+        "post_run",
+        "pre_release",
+        "failure_capture"
+      ]
+    },
+    "execution_boundary": {
+      "type": "object",
+      "required": [
+        "trigger",
+        "target_scope",
+        "blocking_mode"
+      ],
+      "properties": {
+        "trigger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "blocking_mode": {
+          "type": "string",
+          "enum": [
+            "advisory",
+            "warning",
+            "blocking",
+            "human_review_required"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "linked_rumination": {
+      "type": "object",
+      "required": [
+        "recurrence_rule_ids",
+        "rumination_record_refs",
+        "multi_wing_link_refs"
+      ],
+      "properties": {
+        "recurrence_rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rumination_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "multi_wing_link_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "hook_action": {
+      "type": "object",
+      "required": [
+        "action_type",
+        "description"
+      ],
+      "properties": {
+        "action_type": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "warn",
+            "block",
+            "request_validation",
+            "create_rumination_record",
+            "escalate_to_human"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suggested_next_step": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "status",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_started",
+            "passed",
+            "failed",
+            "not_applicable",
+            "manual_review_required"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "human_review": {
+      "type": "object",
+      "required": [
+        "required",
+        "reason"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewer_role": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
