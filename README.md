@@ -418,3 +418,28 @@ Output
 In one sentence:
 
 Verify with the eyes, reflect with the mind, ruminate with the stomach, and align the breath before moving forward.
+
+## v0.2 — Executable Recurrence Rules
+
+As of v0.2, `structural-rumination-layer` extends Structural Rumination Records into executable recurrence checks.
+
+The project no longer treats implementation failures as passive logs. Instead, repeated failure patterns are converted into rule definitions and validation scripts that can detect similar errors before release.
+
+In this sense, v0.1 introduced the digestive layer for structural failure, while v0.2 introduces the first immune response.
+
+### What v0.2 adds
+
+- `rules/recurrence-rules.yaml`
+  - Defines recurrence patterns and executable recurrence rules.
+- `scripts/check_recurrence_rules.py`
+  - Validates the recurrence rule registry itself.
+- `scripts/check_workflow_structure.py`
+  - Detects recurring GitHub Actions workflow structure problems.
+- `scripts/check_yaml_lists.py`
+  - Detects malformed YAML list contamination such as unquoted `*` markers.
+- `scripts/check_json_schema_syntax.py`
+  - Ensures JSON Schema files are parseable as strict JSON.
+- `scripts/check_python_syntax.py`
+  - Checks Python scripts for syntax errors and suspicious dunder corruption patterns.
+
+These checks are derived from actual implementation failures encountered during the development of this repository, including workflow indentation issues, Python syntax corruption, JSON escaping errors, and YAML list marker contamination.
