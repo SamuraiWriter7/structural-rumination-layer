@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-          cache: "pip"
+          cache: "none"   # ← これが重要（pip キャッシュを無効化）
 
       - name: Install validation dependencies
         run: |
@@ -43,4 +43,3 @@ jobs:
           echo "- Validator scope should remain limited to confirmed schema/example pairs."
           echo "- Do not proceed to release if validation failed."
           echo "- Surface repeated structural errors before tagging."
-
