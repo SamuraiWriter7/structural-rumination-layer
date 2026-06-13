@@ -1,0 +1,524 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://samuraiwriter7.github.io/structural-rumination-layer/schemas/rumination-record.schema.json",
+"title": "Rumination Record",
+"description": "A record for verifying, reflecting on, ruminating over, and reducing repeated structural errors in AI-assisted specification workflows.",
+"type": "object",
+"additionalProperties": false,
+"required": [
+"schema_version",
+"id",
+"title",
+"created_at",
+"scope",
+"forward_trace",
+"reverse_trace",
+"verification",
+"reflection",
+"rumination",
+"breathing_alignment",
+"error_visibility",
+"next_gate"
+],
+"properties": {
+"schema_version": {
+"type": "string",
+"description": "Schema version used by this rumination record.",
+"pattern": "^0\.1\.\d+$"
+},
+"id": {
+"type": "string",
+"description": "Unique identifier for this rumination record.",
+"minLength": 1
+},
+"title": {
+"type": "string",
+"description": "Short title describing the structural error or rumination target.",
+"minLength": 1
+},
+"created_at": {
+"type": "string",
+"description": "Creation timestamp for this record.",
+"format": "date-time"
+},
+"scope": {
+"type": "object",
+"description": "Repository and workflow scope for this rumination record.",
+"additionalProperties": false,
+"required": [
+"repo",
+"workflow_stage",
+"objective"
+],
+"properties": {
+"repo": {
+"type": "string",
+"description": "Repository or project name.",
+"minLength": 1
+},
+"workflow_stage": {
+"type": "string",
+"description": "Workflow stage where the rumination applies.",
+"minLength": 1
+},
+"objective": {
+"type": "string",
+"description": "Original objective of the workflow.",
+"minLength": 1
+}
+}
+},
+"forward_trace": {
+"type": "array",
+"description": "Forward path from objective to created or updated artifacts.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/forward_trace_item"
+}
+},
+"reverse_trace": {
+"type": "array",
+"description": "Reverse path from final artifacts back to assumptions and original objective.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/reverse_trace_item"
+}
+},
+"verification": {
+"type": "object",
+"description": "Concrete verification results based on actual repository state.",
+"additionalProperties": false,
+"required": [
+"status",
+"checks",
+"issues_found"
+],
+"properties": {
+"status": {
+"type": "string",
+"enum": [
+"passed",
+"passed_with_warnings",
+"failed",
+"blocked"
+]
+},
+"checks": {
+"type": "array",
+"description": "Verification checks performed before reflection.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/check_item"
+}
+},
+"issues_found": {
+"type": "array",
+"description": "Visible issues found during verification.",
+"items": {
+"$ref": "#/$defs/issue_item"
+}
+}
+}
+},
+"reflection": {
+"type": "object",
+"description": "Cause classification for the verified issue.",
+"additionalProperties": false,
+"required": [
+"root_causes",
+"human_burden"
+],
+"properties": {
+"root_causes": {
+"type": "array",
+"description": "Likely structural causes of the issue.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/root_cause_item"
+}
+},
+"human_burden": {
+"type": "object",
+"description": "Human-side burden created or reduced by the workflow.",
+"additionalProperties": false,
+"required": [
+"burden_created",
+"burden_reduced"
+],
+"properties": {
+"burden_created": {
+"type": "array",
+"items": {
+"type": "string",
+"minLength": 1
+}
+},
+"burden_reduced": {
+"type": "array",
+"items": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+}
+}
+},
+"rumination": {
+"type": "object",
+"description": "Conversion of reflected lessons into recurrence-prevention rules.",
+"additionalProperties": false,
+"required": [
+"recurrence_patterns",
+"recurrence_rules"
+],
+"properties": {
+"recurrence_patterns": {
+"type": "array",
+"description": "Known or suspected repeated structural error patterns.",
+"items": {
+"$ref": "#/$defs/recurrence_pattern_item"
+}
+},
+"recurrence_rules": {
+"type": "array",
+"description": "Rules created or updated to prevent recurrence.",
+"minItems": 1,
+"items": {
+"$ref": "#/$defs/recurrence_rule_item"
+}
+}
+}
+},
+"breathing_alignment": {
+"type": "object",
+"description": "Final calming and rebalancing check before proceeding.",
+"additionalProperties": false,
+"required": [
+"output_pressure",
+"human_burden_reduced",
+"remaining_uncertainty",
+"proceed"
+],
+"properties": {
+"output_pressure": {
+"type": "string",
+"description": "Estimated pressure created by output volume or workflow complexity.",
+"enum": [
+"low",
+"medium",
+"high"
+]
+},
+"human_burden_reduced": {
+"type": "boolean",
+"description": "Whether the workflow reduced rather than increased human-side burden."
+},
+"remaining_uncertainty": {
+"type": "array",
+"description": "Uncertainties that remain visible before proceeding.",
+"items": {
+"type": "string",
+"minLength": 1
+}
+},
+"proceed": {
+"type": "boolean",
+"description": "Whether the next workflow step may proceed."
+},
+"reason": {
+"type": "string",
+"description": "Reason for proceeding or stopping."
+}
+}
+},
+"error_visibility": {
+"type": "object",
+"description": "Final visibility state of errors, uncertainties, and recurrence risks.",
+"additionalProperties": false,
+"required": [
+"visible_summary",
+"visibility_level",
+"repeated_error_risk",
+"surfaced_to_human"
+],
+"properties": {
+"visible_summary": {
+"type": "string",
+"description": "Concise summary of the visible error or recurrence risk.",
+"minLength": 1
+},
+"visibility_level": {
+"type": "string",
+"enum": [
+"info",
+"warning",
+"error",
+"blocker"
+]
+},
+"repeated_error_risk": {
+"type": "string",
+"enum": [
+"low",
+"medium",
+"high"
+]
+},
+"surfaced_to_human": {
+"type": "boolean",
+"description": "Whether the error or uncertainty was explicitly surfaced to the human operator."
+}
+}
+},
+"next_gate": {
+"type": "object",
+"description": "Conditions to check before the next output or workflow step.",
+"additionalProperties": false,
+"required": [
+"before_next_output",
+"block_if"
+],
+"properties": {
+"before_next_output": {
+"type": "array",
+"description": "Checks that must be performed before the next output.",
+"minItems": 1,
+"items": {
+"type": "string",
+"minLength": 1
+}
+},
+"block_if": {
+"type": "array",
+"description": "Conditions that should block progress.",
+"items": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+}
+},
+"$defs": {
+"forward_trace_item": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"step",
+"artifact",
+"status"
+],
+"properties": {
+"step": {
+"type": "integer",
+"minimum": 1
+},
+"artifact": {
+"type": "string",
+"description": "Artifact created, updated, planned, skipped, or failed.",
+"minLength": 1
+},
+"status": {
+"type": "string",
+"enum": [
+"planned",
+"created",
+"updated",
+"skipped",
+"failed"
+]
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"reverse_trace_item": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"from_artifact",
+"to_assumption",
+"status"
+],
+"properties": {
+"from_artifact": {
+"type": "string",
+"description": "Artifact being traced backward.",
+"minLength": 1
+},
+"to_assumption": {
+"type": "string",
+"description": "Assumption, dependency, or original objective being checked.",
+"minLength": 1
+},
+"status": {
+"type": "string",
+"enum": [
+"aligned",
+"mismatch",
+"uncertain"
+]
+},
+"evidence": {
+"type": "string"
+}
+}
+},
+"check_item": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"name",
+"status"
+],
+"properties": {
+"name": {
+"type": "string",
+"minLength": 1
+},
+"status": {
+"type": "string",
+"enum": [
+"passed",
+"warning",
+"failed",
+"blocked",
+"not_applicable"
+]
+},
+"notes": {
+"type": "string"
+}
+}
+},
+"issue_item": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"type",
+"severity",
+"description"
+],
+"properties": {
+"type": {
+"type": "string",
+"description": "Issue type such as path_mismatch, documentation_drift, or validator_mismatch.",
+"minLength": 1
+},
+"severity": {
+"type": "string",
+"enum": [
+"info",
+"warning",
+"error",
+"blocker"
+]
+},
+"description": {
+"type": "string",
+"minLength": 1
+},
+"affected_paths": {
+"type": "array",
+"items": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+},
+"root_cause_item": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"category",
+"description"
+],
+"properties": {
+"category": {
+"type": "string",
+"enum": [
+"assumption_error",
+"path_mismatch",
+"validator_mismatch",
+"documentation_drift",
+"workflow_assumption",
+"premature_release",
+"human_burden",
+"other"
+]
+},
+"description": {
+"type": "string",
+"minLength": 1
+}
+}
+},
+"recurrence_pattern_item": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"pattern_id",
+"description",
+"risk"
+],
+"properties": {
+"pattern_id": {
+"type": "string",
+"minLength": 1
+},
+"description": {
+"type": "string",
+"minLength": 1
+},
+"risk": {
+"type": "string",
+"enum": [
+"low",
+"medium",
+"high"
+]
+}
+}
+},
+"recurrence_rule_item": {
+"type": "object",
+"additionalProperties": false,
+"required": [
+"rule_id",
+"rule",
+"applies_before"
+],
+"properties": {
+"rule_id": {
+"type": "string",
+"minLength": 1
+},
+"rule": {
+"type": "string",
+"description": "Actionable recurrence-prevention rule.",
+"minLength": 1
+},
+"applies_before": {
+"type": "array",
+"description": "Future workflow actions before which this rule must be checked.",
+"minItems": 1,
+"items": {
+"type": "string",
+"minLength": 1
+}
+},
+"blocks_if": {
+"type": "array",
+"description": "Conditions under which this rule blocks progress.",
+"items": {
+"type": "string",
+"minLength": 1
+}
+}
+}
+}
+}
+}
