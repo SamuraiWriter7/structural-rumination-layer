@@ -4,7 +4,7 @@
 
 It does not aim to make AI perfectly error-free.
 
-Instead, it helps AI systems and human operators verify outputs, reflect on mistakes, ruminate on repeated error patterns, convert them into recurrence-prevention rules, share those rules across multiple structural wings, and connect them to AI agent execution boundaries.
+Instead, it helps AI systems and human operators verify outputs, reflect on mistakes, ruminate on repeated error patterns, convert them into recurrence-prevention rules, share those rules across multiple structural wings, connect them to AI agent execution boundaries, and gather release-readiness evidence before candidate releases.
 
 In short:
 
@@ -31,6 +31,7 @@ However, in practical GitHub specification work, they may still repeat basic str
 * producing polished documentation before verifying concrete file paths,
 * repeating YAML / JSON / Python syntax mistakes during rapid iteration,
 * recommending releases before validation evidence is complete,
+* allowing validation checks to become too broad or self-triggering,
 * pushing repeated debugging work back onto the human operator.
 
 This repository defines a minimal protocol for digesting those errors instead of merely correcting them once.
@@ -39,13 +40,13 @@ The goal is not binary perfection.
 
 The goal is:
 
-> Bias correction, recurrence reduction, cross-wing failure sharing, AI agent boundary checks, and human burden reduction through structured rumination.
+> Bias correction, recurrence reduction, cross-wing failure sharing, AI agent boundary checks, release-readiness gating, and human burden reduction through structured rumination.
 
 ---
 
 ## Core Concept
 
-`structural-rumination-layer` is a minimal OS for treating AI development failures not as disposable logs, but as structural data that can be recorded, digested, converted into recurrence-prevention rules, shared across wings, and connected to AI agent execution boundaries.
+`structural-rumination-layer` is a minimal OS for treating AI development failures not as disposable logs, but as structural data that can be recorded, digested, converted into recurrence-prevention rules, shared across wings, connected to AI agent execution boundaries, and gathered into pre-release readiness gates.
 
 The project evolves through these layers:
 
@@ -61,6 +62,9 @@ v0.3 = Multi-Wing Integration
 
 v0.4 = AI Agent Hooks
        Recurrence knowledge becomes agent-facing execution guidance.
+
+v0.5 = Pre-release Rumination Gate
+       Rumination evidence becomes release-readiness guidance.
 ```
 
 In metaphorical terms:
@@ -70,6 +74,7 @@ v0.1 = digestive layer
 v0.2 = first immune response
 v0.3 = cross-wing nervous system
 v0.4 = agent-facing reflex layer
+v0.5 = pre-release gate
 ```
 
 ---
@@ -146,6 +151,7 @@ Examples:
 * Did CHANGELOG match the actual changes?
 * Did the executable recurrence checks pass?
 * Did the agent hook require human review before release?
+* Did the pre-release gate gather enough evidence before recommending a candidate state?
 
 Verification is the eye of the workflow.
 
@@ -164,6 +170,8 @@ Examples:
 * Was README updated before file paths were confirmed?
 * Was a previous recurrence rule ignored?
 * Was an AI agent allowed to proceed without a boundary check?
+* Did a validation rule become too broad?
+* Did a checker detect its own detector strings?
 * Did the burden shift back to the human operator?
 
 Reflection is not about apology.
@@ -183,6 +191,7 @@ Examples:
 * Do not propose workflow edits before confirming workflow existence.
 * Do not proceed to release if README and CHANGELOG drift from actual files.
 * Do not recommend a candidate tag before validation evidence is available.
+* Do not detect malformed Python identifiers by raw substring matching.
 * Do not allow the same structural error to recur without a new rule.
 
 Rumination is the digestive layer of the workflow.
@@ -203,6 +212,7 @@ It asks:
 * Is the next step clear?
 * Is the workflow lighter than before?
 * Should an AI agent pause, warn, block, or ask for human review?
+* Should a release gate request more evidence before proceeding?
 
 This prevents reflection from becoming rigid perfectionism.
 
@@ -225,8 +235,9 @@ The final check should make the following clear:
 * What uncertainty remains?
 * Can this recurrence pattern help another wing?
 * Should this recurrence pattern become an AI agent hook?
+* Should this recurrence pattern affect pre-release readiness?
 
-Invisible errors cannot become reflection, rumination, recurrence prevention, cross-wing learning, or agent-facing execution guidance.
+Invisible errors cannot become reflection, rumination, recurrence prevention, cross-wing learning, agent-facing execution guidance, or release-readiness evidence.
 
 ---
 
@@ -282,7 +293,8 @@ Examples:
 * repeated README/file-tree drift,
 * repeated human-side debugging burden,
 * repeated YAML / JSON / Python syntax corruption,
-* repeated release recommendation before validation evidence.
+* repeated release recommendation before validation evidence,
+* repeated over-broad checker logic.
 
 A workflow should not proceed if the same structural error pattern appears again without a new recurrence-prevention rule.
 
@@ -343,7 +355,7 @@ v0.2 = detect recurrence
   * Ensures JSON Schema files are parseable as strict JSON.
 * `scripts/check_python_syntax.py`
 
-  * Checks Python scripts for syntax errors and suspicious dunder corruption patterns.
+  * Checks Python scripts for syntax errors and suspicious malformed identifier patterns.
 * `docs/executable-recurrence-rules.md`
 
   * Explains how recurrence patterns become executable validation checks.
@@ -464,6 +476,67 @@ It is the first step toward structural rumination gates for AI-assisted developm
 
 ---
 
+## v0.5 — Pre-release Rumination Gate
+
+As of v0.5, `structural-rumination-layer` combines rumination records, executable recurrence rules, multi-wing links, AI agent hooks, validation evidence, and human review boundaries into a unified pre-release gate.
+
+A repository should not proceed to a candidate release only because files were generated.
+
+Before release, the gate asks:
+
+* Have known recurrence rules passed?
+* Have schema/example pairs validated?
+* Have README and CHANGELOG been aligned?
+* Are multi-wing links structurally valid?
+* Are AI agent hooks accounted for?
+* Is human review required?
+* Has any known structural failure repeated?
+
+In short:
+
+```text
+v0.5 = decide release readiness through a rumination gate
+```
+
+### What v0.5 adds
+
+* `docs/pre-release-rumination-gate.md`
+
+  * Explains how rumination evidence is gathered before candidate release.
+* `schemas/pre-release-rumination-gate.schema.json`
+
+  * Defines a schema for pre-release gate evidence and release-readiness decisions.
+* `examples/pre-release-rumination-gate.example.yaml`
+
+  * Provides a validated example of a pre-release gate record.
+* `scripts/check_pre_release_gate.py`
+
+  * Runs the unified pre-release rumination gate.
+* `.github/workflows/validate-examples.yml`
+
+  * Runs the pre-release gate as part of continuous validation.
+
+### Gate decisions
+
+A Pre-release Rumination Gate may decide:
+
+* `allow_candidate_tag`
+
+  * All required checks passed and no blocking review remains.
+* `warn`
+
+  * Minor issues exist, but they do not block the candidate state.
+* `request_human_review`
+
+  * The system is structurally ready enough to review, but human confirmation is required.
+* `block_release`
+
+  * A known recurrence pattern, failed validation, or unresolved structural inconsistency blocks release.
+
+v0.5 turns structural rumination into release-readiness evidence.
+
+---
+
 ## Repository Structure
 
 ```text
@@ -472,6 +545,7 @@ docs/
   executable-recurrence-rules.md
   final-error-visibility-check.md
   multi-wing-integration.md
+  pre-release-rumination-gate.md
   rumination-sieve-protocol.md
 
 rules/
@@ -480,15 +554,18 @@ rules/
 schemas/
   ai-agent-rumination-hook.schema.json
   multi-wing-rumination-link.schema.json
+  pre-release-rumination-gate.schema.json
   rumination-record.schema.json
 
 examples/
   ai-agent-rumination-hook.example.yaml
   multi-wing-rumination-link.example.yaml
+  pre-release-rumination-gate.example.yaml
   rumination-record.example.yaml
 
 scripts/
   check_json_schema_syntax.py
+  check_pre_release_gate.py
   check_python_syntax.py
   check_recurrence_rules.py
   check_workflow_structure.py
@@ -522,6 +599,9 @@ CHANGELOG.md
 * [`docs/ai-agent-hooks.md`](docs/ai-agent-hooks.md)
 
   * Explains how recurrence knowledge can be connected to AI agent execution boundaries.
+* [`docs/pre-release-rumination-gate.md`](docs/pre-release-rumination-gate.md)
+
+  * Explains how structural rumination evidence becomes pre-release readiness guidance.
 
 ---
 
@@ -582,6 +662,25 @@ Records:
 * human review boundary,
 * notes.
 
+### Pre-release Rumination Gate
+
+```text
+schemas/pre-release-rumination-gate.schema.json
+```
+
+Records:
+
+* gate ID,
+* target release,
+* repository scope,
+* rumination inputs,
+* executable checks,
+* validation evidence,
+* gate checks,
+* gate decision,
+* human review boundary,
+* notes.
+
 ---
 
 ## Examples
@@ -610,6 +709,14 @@ examples/ai-agent-rumination-hook.example.yaml
 
 Demonstrates how recurrence rules and multi-wing rumination links can be connected to an AI agent’s pre-release execution boundary.
 
+### Pre-release Rumination Gate Example
+
+```text
+examples/pre-release-rumination-gate.example.yaml
+```
+
+Demonstrates how rumination records, recurrence rules, executable checks, multi-wing links, AI agent hooks, validation evidence, and human review boundaries can be gathered before a candidate release.
+
 ---
 
 ## Validation
@@ -629,6 +736,7 @@ python scripts/check_yaml_lists.py
 python scripts/check_json_schema_syntax.py
 python scripts/check_python_syntax.py
 python scripts/validate_examples.py
+python scripts/check_pre_release_gate.py
 ```
 
 Expected result:
@@ -643,16 +751,17 @@ These checks validate:
 * GitHub Actions workflow structure,
 * YAML list marker hygiene,
 * JSON Schema syntax,
-* Python syntax and suspicious dunder corruption patterns,
+* Python syntax and suspicious malformed identifier patterns,
 * schema/example consistency,
 * multi-wing rumination link examples,
-* AI agent rumination hook examples.
+* AI agent rumination hook examples,
+* pre-release rumination gate evidence.
 
 ---
 
 ## Continuous Validation
 
-This repository includes a minimal GitHub Actions workflow for validating confirmed schema/example pairs and recurrence checks.
+This repository includes a minimal GitHub Actions workflow for validating confirmed schema/example pairs, recurrence checks, and the pre-release rumination gate.
 
 Workflow:
 
@@ -672,13 +781,13 @@ It does not attempt to automate release generation, package publishing, broad mu
 
 Its purpose is narrower:
 
-> Keep the rumination loop executable, visible, stable, and agent-aware.
+> Keep the rumination loop executable, visible, stable, agent-aware, and release-gated.
 
 ---
 
 ## CI Status
 
-The validation workflow has passed after resolving and digesting the first set of structural rumination errors.
+The validation workflow has passed after resolving and digesting multiple structural rumination errors.
 
 The first-generation errors digested during this process included:
 
@@ -688,9 +797,15 @@ The first-generation errors digested during this process included:
 * JSON Schema regex escape errors,
 * YAML list syntax corruption caused by Markdown-style `*` bullets.
 
+During v0.5, the pre-release gate also surfaced a checker-level false positive:
+
+* Python syntax checking initially used overly broad raw substring matching,
+* the checker detected its own detector strings,
+* the check was refined to inspect Python identifier tokens instead of arbitrary text.
+
 These were not treated as isolated fixes.
 
-They were treated as first-generation rumination records and converted into recurrence-prevention rules.
+They were treated as rumination events and converted into recurrence-prevention knowledge.
 
 In short:
 
@@ -713,11 +828,12 @@ Instead, it says:
 > Recurrence rules must become executable.
 > Useful failure knowledge should be shareable across wings.
 > AI agents should pass through structural rumination boundaries.
+> Candidate releases should pass through a rumination gate.
 > The workflow must become lighter after each cycle.
 
 The goal is not zero error.
 
-The goal is reduced recurrence, reduced human burden, better structural digestion, and safer agent-assisted execution.
+The goal is reduced recurrence, reduced human burden, better structural digestion, safer agent-assisted execution, and clearer release readiness.
 
 ---
 
@@ -735,7 +851,8 @@ This protocol is intended for workflows involving:
 * AI-assisted documentation,
 * recurring error pattern management,
 * multi-agent or multi-repository specification work,
-* AI agent pre-run, pre-write, post-run, pre-release, and failure-capture boundaries.
+* AI agent pre-run, pre-write, post-run, pre-release, and failure-capture boundaries,
+* candidate release readiness checks.
 
 It is especially useful when AI systems repeatedly produce plausible but structurally inconsistent outputs.
 
@@ -752,6 +869,7 @@ v0.1 = Structural Rumination Record
 v0.2 = Executable Recurrence Rules
 v0.3 = Multi-Wing Integration
 v0.4 = AI Agent Hooks
+v0.5 = Pre-release Rumination Gate
 ```
 
 Not included yet:
@@ -761,7 +879,8 @@ Not included yet:
 * full multi-repository orchestration,
 * live AI agent runtime integration,
 * automatic rule propagation across repositories,
-* autonomous blocking of external agent actions.
+* autonomous blocking of external agent actions,
+* fully automated semantic release judgment.
 
 These are deferred to avoid adding structure faster than it can be verified.
 
@@ -781,6 +900,9 @@ v0.3 = Multi-Wing Integration
 
 v0.4 = AI Agent Hooks
        Recurrence knowledge is connected to AI agent execution boundaries.
+
+v0.5 = Pre-release Rumination Gate
+       Rumination evidence is gathered before candidate release.
 ```
 
 ---
@@ -790,16 +912,16 @@ v0.4 = AI Agent Hooks
 Current version:
 
 ```text
-v0.4.0-candidate
+v0.5.0-candidate
 ```
 
-This version introduces the first validated structure for connecting recurrence knowledge to AI agent execution boundaries.
+This version introduces the first validated structure for gathering structural rumination evidence before candidate releases.
 
 ---
 
 ## Summary
 
-Structural Rumination Layer exists to give AI-assisted work a digestive system, an immune response, a cross-wing nervous system, and the beginning of an agent-facing reflex layer.
+Structural Rumination Layer exists to give AI-assisted work a digestive system, an immune response, a cross-wing nervous system, an agent-facing reflex layer, and a pre-release gate.
 
 It helps transform:
 
@@ -820,9 +942,10 @@ Output
   -> Recurrence Prevention
   -> Cross-Wing Learning
   -> Agent Boundary Check
+  -> Pre-release Gate
   -> Lighter Workflow
 ```
 
 In one sentence:
 
-> Verify with the eyes, reflect with the mind, ruminate with the stomach, circulate through the wings, hook into the agent boundary, and align the breath before moving forward.
+> Verify with the eyes, reflect with the mind, ruminate with the stomach, circulate through the wings, hook into the agent boundary, pass through the release gate, and align the breath before moving forward.
