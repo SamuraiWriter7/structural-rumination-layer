@@ -1,0 +1,96 @@
+gate_id: "prg-2026-06-14-001"
+version: "0.5.0-candidate"
+gate_type: "pre_release"
+
+target_release:
+  release_version: "v0.5.0-candidate"
+  tag_name: "v0.5.0-candidate"
+  status: "candidate"
+
+scope:
+  repository: "SamuraiWriter7/structural-rumination-layer"
+  branch: "main"
+  release_boundary: "Before cutting a candidate release tag"
+
+inputs:
+  rumination_records:
+    - "examples/rumination-record.example.yaml"
+  recurrence_rules_registry: "rules/recurrence-rules.yaml"
+  executable_checks:
+    - script: "scripts/check_recurrence_rules.py"
+      status: "passed"
+    - script: "scripts/check_workflow_structure.py"
+      status: "passed"
+    - script: "scripts/check_yaml_lists.py"
+      status: "passed"
+    - script: "scripts/check_json_schema_syntax.py"
+      status: "passed"
+    - script: "scripts/check_python_syntax.py"
+      status: "passed"
+    - script: "scripts/validate_examples.py"
+      status: "passed"
+  multi_wing_links:
+    - "examples/multi-wing-rumination-link.example.yaml"
+  agent_hooks:
+    - "examples/ai-agent-rumination-hook.example.yaml"
+
+validation_evidence:
+  summary: >
+    The pre-release gate gathers recurrence checks, schema/example
+    validation, multi-wing links, and AI agent hook evidence before a
+    candidate release tag is cut.
+  commands:
+    - "python scripts/check_recurrence_rules.py"
+    - "python scripts/check_workflow_structure.py"
+    - "python scripts/check_yaml_lists.py"
+    - "python scripts/check_json_schema_syntax.py"
+    - "python scripts/check_python_syntax.py"
+    - "python scripts/validate_examples.py"
+    - "python scripts/check_pre_release_gate.py"
+
+gate_checks:
+  - check_id: "recurrence-rules-valid"
+    status: "passed"
+    required: true
+    evidence: "rules/recurrence-rules.yaml is structurally valid."
+  - check_id: "executable-checks-pass"
+    status: "passed"
+    required: true
+    evidence: "Executable recurrence checks are expected to pass before release."
+  - check_id: "schema-example-pairs-valid"
+    status: "passed"
+    required: true
+    evidence: "All registered schema/example pairs validate successfully."
+  - check_id: "multi-wing-link-present"
+    status: "passed"
+    required: true
+    evidence: "Multi-wing rumination link example is registered and validated."
+  - check_id: "ai-agent-hook-present"
+    status: "passed"
+    required: true
+    evidence: "AI agent rumination hook example is registered and validated."
+  - check_id: "human-review-boundary"
+    status: "manual_review_required"
+    required: true
+    evidence: "Candidate release tagging requires repository maintainer review."
+
+gate_decision:
+  decision: "request_human_review"
+  reason: >
+    Automated structural checks are represented as passing, but candidate
+    release tagging remains a high-impact boundary that requires human
+    confirmation.
+  next_step: >
+    Review README, CHANGELOG, docs, schemas, examples, and validation
+    output before cutting the v0.5.0-candidate tag.
+
+human_review:
+  required: true
+  reason: >
+    The pre-release gate can organize validation evidence, but final release
+    readiness should be confirmed by the repository maintainer.
+  reviewer_role: "repository maintainer"
+
+notes: >
+  This example shows how structural rumination evidence can be gathered into
+  a unified pre-release gate before a candidate tag is created.
