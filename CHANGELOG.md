@@ -51,6 +51,58 @@ Pass 3: Recurrence Check
 
 ---
 
+### Added
+
+* Added GitHub Actions validation workflow:
+
+  * `.github/workflows/validate-examples.yml`
+
+* The workflow validates the confirmed v0.1 schema/example pair by running:
+
+```bash
+python scripts/validate_examples.py
+```
+
+* CI validation has passed for the initial v0.1 structure.
+
+---
+
+### Rumination Notes
+
+The first CI validation cycle surfaced and digested several structural errors:
+
+* GitHub Actions YAML indentation error around `steps:`.
+* `setup-python` cache configuration used without `requirements.txt` or `pyproject.toml`.
+* Python double-underscore names were corrupted during code transfer.
+* JSON Schema regex backslashes were not escaped correctly.
+* YAML example lists used Markdown-style `*` bullets instead of YAML `-` list markers.
+
+These errors were converted into recurrence-prevention rules.
+
+The v0.1 workflow now confirms:
+
+* schema/example validation can run locally,
+* the same validation can run in GitHub Actions,
+* the repository can use its own rumination protocol to identify and reduce repeated structural errors.
+
+---
+
+### Updated Design Notes
+
+This candidate now includes a minimal CI validation loop.
+
+The workflow remains intentionally narrow:
+
+* one confirmed schema,
+* one confirmed example,
+* one local validation script,
+* one GitHub Actions validation workflow.
+
+The purpose is not broad automation.
+
+The purpose is to ensure that the first rumination loop is executable and stable before expanding the repository.
+
+
 ### Design Notes
 
 This version intentionally keeps the scope small.
