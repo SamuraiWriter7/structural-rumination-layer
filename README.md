@@ -826,5 +826,3 @@ Output
 In one sentence:
 
 > Verify with the eyes, reflect with the mind, ruminate with the stomach, circulate through the wings, hook into the agent boundary, and align the breath before moving forward.
-
-
