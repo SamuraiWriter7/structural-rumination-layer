@@ -42,3 +42,6 @@ jobs:
           echo "- Validator scope should remain limited to confirmed schema/example pairs."
           echo "- Do not proceed to release if validation failed."
           echo "- Surface repeated structural errors before tagging."
+
+      - name: Run pre-release rumination gate
+        run: python scripts/check_pre_release_gate.py
