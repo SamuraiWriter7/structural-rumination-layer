@@ -14,6 +14,79 @@ This project follows a simple principle:
 
 ---
 
+## [0.4.0-candidate] - 2026-06-14
+
+### Added
+
+* Added `docs/ai-agent-hooks.md`.
+
+  * Explains how recurrence knowledge can be connected to AI agent execution boundaries.
+* Added `schemas/ai-agent-rumination-hook.schema.json`.
+
+  * Defines the structure for AI agent rumination hooks.
+* Added `examples/ai-agent-rumination-hook.example.yaml`.
+
+  * Demonstrates how recurrence rules and multi-wing rumination links can be connected to an AI agent’s pre-release execution boundary.
+* Added AI Agent Hooks as the v0.4 theme.
+
+  * `v0.1 = Structural Rumination Record`
+  * `v0.2 = Executable Recurrence Rules`
+  * `v0.3 = Multi-Wing Integration`
+  * `v0.4 = AI Agent Hooks`
+
+### Changed
+
+* Extended the project from cross-wing recurrence sharing toward AI agent execution boundary guidance.
+* Updated the validation flow to include the AI agent rumination hook schema/example pair.
+* Updated the conceptual model from a digestive / immune / nervous system model toward an agent-facing reflex layer.
+* Clarified that recurrence knowledge can influence AI agent behavior before, during, or after execution.
+* Added AI agent hook types:
+
+  * `pre_run`
+  * `pre_write`
+  * `post_run`
+  * `pre_release`
+  * `failure_capture`
+* Added hook actions:
+
+  * `allow`
+  * `warn`
+  * `block`
+  * `request_validation`
+  * `create_rumination_record`
+  * `escalate_to_human`
+
+### Validated
+
+* Confirmed that GitHub Actions passes with the v0.4 AI Agent Hooks schema/example pair included.
+* Confirmed that `examples/ai-agent-rumination-hook.example.yaml` validates against `schemas/ai-agent-rumination-hook.schema.json`.
+* Confirmed that README, CHANGELOG, docs, schema, example, and validation flow are aligned for the v0.4 candidate state.
+
+### Conceptual Notes
+
+v0.4 introduces the first structure for connecting recurrence knowledge to AI agent execution boundaries.
+
+An AI agent can now be represented as passing through hooks such as:
+
+* pre-run checks,
+* pre-write checks,
+* post-run checks,
+* pre-release checks,
+* failure-capture checks.
+
+This allows recurrence rules and rumination records to become agent-facing execution guidance.
+
+In short:
+
+```text
+v0.1 = record failure
+v0.2 = detect recurrence
+v0.3 = share recurrence knowledge across wings
+v0.4 = hook recurrence knowledge into AI agent execution
+```
+
+---
+
 ## [0.3.0-candidate] - 2026-06-14
 
 ### Added
