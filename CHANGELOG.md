@@ -14,6 +14,110 @@ This project follows a simple principle:
 
 ---
 
+## [0.5.0-candidate] - 2026-06-14
+
+### Added
+
+* Added `docs/pre-release-rumination-gate.md`.
+
+  * Explains how structural rumination evidence is gathered before candidate release.
+* Added `schemas/pre-release-rumination-gate.schema.json`.
+
+  * Defines the structure for pre-release gate evidence and release-readiness decisions.
+* Added `examples/pre-release-rumination-gate.example.yaml`.
+
+  * Demonstrates how rumination records, recurrence rules, executable checks, multi-wing links, AI agent hooks, validation evidence, and human review boundaries can be gathered before a candidate release.
+* Added `scripts/check_pre_release_gate.py`.
+
+  * Runs the unified pre-release rumination gate.
+* Updated `.github/workflows/validate-examples.yml`.
+
+  * Runs the pre-release rumination gate during continuous validation.
+* Added Pre-release Rumination Gate as the v0.5 theme.
+
+  * `v0.1 = Structural Rumination Record`
+  * `v0.2 = Executable Recurrence Rules`
+  * `v0.3 = Multi-Wing Integration`
+  * `v0.4 = AI Agent Hooks`
+  * `v0.5 = Pre-release Rumination Gate`
+
+### Changed
+
+* Extended the project from AI agent execution boundary guidance toward release-readiness gating.
+* Updated the validation flow to include the pre-release rumination gate schema/example pair.
+* Updated the CI workflow to run `scripts/check_pre_release_gate.py`.
+* Updated the project model from digestive / immune / nervous / reflex layers toward a pre-release gate.
+* Clarified how rumination records, recurrence rules, executable checks, multi-wing links, AI agent hooks, validation evidence, and human review boundaries can be gathered before a candidate release.
+* Refined Python syntax checking to inspect identifier tokens instead of arbitrary raw text, reducing false positives.
+
+### Validated
+
+* Confirmed that GitHub Actions passes with the v0.5 Pre-release Rumination Gate included.
+* Confirmed that `examples/pre-release-rumination-gate.example.yaml` validates against `schemas/pre-release-rumination-gate.schema.json`.
+* Confirmed that `scripts/check_pre_release_gate.py` runs the recurrence checks, syntax checks, schema/example validation, and gate checks as a unified pre-release boundary.
+* Confirmed that README, CHANGELOG, docs, schema, example, validation scripts, and GitHub Actions are aligned for the v0.5 candidate state.
+
+### Rumination Notes
+
+The v0.5 validation cycle surfaced and digested an additional checker-level failure pattern.
+
+Initial failure:
+
+```text
+syntax-check rule detected its own detector strings
+```
+
+Cause:
+
+```text
+The Python syntax checker used broad raw substring matching for malformed
+dunder-like patterns, causing valid checker code or detector strings to be
+flagged as suspicious.
+```
+
+Resolution:
+
+```text
+Python identifier integrity checks were refined to inspect actual Python
+identifier tokens rather than arbitrary raw text.
+```
+
+Recurrence-prevention rule:
+
+```text
+Python identifier integrity checks should inspect tokens, not arbitrary text.
+```
+
+This is a direct example of the repository using its own rumination process on its own validation layer.
+
+### Conceptual Notes
+
+v0.5 introduces the first unified pre-release gate.
+
+A candidate release should not proceed only because files were generated.
+
+Before release, the repository should gather evidence:
+
+* recurrence rules are valid,
+* executable checks pass,
+* schemas and examples validate,
+* multi-wing links are represented,
+* AI agent hooks are represented,
+* README and CHANGELOG are aligned,
+* human review boundaries are visible.
+
+In short:
+
+```text
+v0.1 = record failure
+v0.2 = detect recurrence
+v0.3 = share recurrence knowledge across wings
+v0.4 = hook recurrence knowledge into AI agent execution
+v0.5 = decide release readiness through a rumination gate
+```
+
+---
+
 ## [0.4.0-candidate] - 2026-06-14
 
 ### Added
@@ -152,7 +256,7 @@ v0.3 = share recurrence knowledge across wings
 * Added `scripts/check_workflow_structure.py` to detect recurring GitHub Actions workflow structure issues.
 * Added `scripts/check_yaml_lists.py` to detect malformed YAML list marker contamination.
 * Added `scripts/check_json_schema_syntax.py` to ensure JSON Schema files are parseable as strict JSON.
-* Added `scripts/check_python_syntax.py` to detect Python syntax errors and suspicious dunder corruption patterns.
+* Added `scripts/check_python_syntax.py` to detect Python syntax errors and suspicious malformed identifier patterns.
 * Added `docs/executable-recurrence-rules.md` to document the v0.2 rule execution model.
 * Introduced the v0.2 theme: **Executable Recurrence Rules**.
 
