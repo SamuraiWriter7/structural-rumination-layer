@@ -106,11 +106,6 @@ def main() -> int:
         )
         all_passed = all_passed and passed
 
-      (
-        "schemas/multi-wing-rumination-link.schema.json",
-        "examples/multi-wing-rumination-link.example.yaml",
-      ),
-
     print("\nFinal Error Visibility Check")
     print("=" * 56)
 
@@ -126,4 +121,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
 
